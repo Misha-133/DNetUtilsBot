@@ -51,8 +51,8 @@ public class NugetModule(ILogger<NugetModule> logger, ILoggerFactory loggerFacto
 
 		var emb = new EmbedBuilder()
 			.WithColor(0xff00)
-			.WithTitle("# `Discord.Net` Nuget Stats")
-			.WithDescription($"Total downloads: `{stats.Sum(x => x.Value ?? 0)}`")
+			.WithTitle("`Discord.Net` Nuget Stats")
+			.WithDescription($"## Total downloads: **`{stats.Sum(x => x.Value ?? 0)}`**")
 			.WithCurrentTimestamp();
 
 		foreach (var stat in stats)
