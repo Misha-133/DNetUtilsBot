@@ -1,11 +1,12 @@
 FROM mcr.microsoft.com/dotnet/runtime:8.0-alpine AS base
 USER app
-WORKDIR /app 
-RUN apk add --no-cache icu-libs icu-data-full
+WORKDIR /app
 
 LABEL org.opencontainers.image.source=https://github.com/Misha-133/DNetUtilsBot
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS build
+
+RUN apk add --no-cache icu-libs icu-data-full
 
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
