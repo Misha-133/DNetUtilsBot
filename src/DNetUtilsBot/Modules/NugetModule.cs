@@ -34,6 +34,9 @@ public class NugetModule(ILogger<NugetModule> logger, ILoggerFactory loggerFacto
 
 		foreach (var stat in stats)
 		{
+			if (stat.Value is not null)
+				return;
+
 			var result = await p.SearchAsync(stat.Key, filter, 0, 10, NullLogger.Instance, CancellationToken.None);
 
 			foreach (var res in result)
@@ -48,13 +51,13 @@ public class NugetModule(ILogger<NugetModule> logger, ILoggerFactory loggerFacto
 
 		var emb = new EmbedBuilder()
 			.WithColor(0xff00)
-			.WithTitle("`Discord.Net` Nuget Stats")
+			.WithTitle("# `Discord.Net` Nuget Stats")
 			.WithDescription($"Total downloads: `{stats.Sum(x => x.Value ?? 0)}`")
 			.WithCurrentTimestamp();
 
 		foreach (var stat in stats)
 		{
-			emb.AddField(stat.Key, $"`{stat.Value.ToString() ?? "Unknown"}`", true);
+			emb.AddField(stat.Key, $"`{stat.Value?.ToString() ?? "Unknown"}`", true);
 		}
 
 		await FollowupAsync(embed: emb.Build());
