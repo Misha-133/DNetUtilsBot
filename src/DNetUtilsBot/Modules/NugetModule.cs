@@ -22,8 +22,12 @@ public class NugetModule(ILogger<NugetModule> logger, ILoggerFactory loggerFacto
 			{ "Discord.Net.Core", null },
             { "Discord.Net.Rest", null },
             { "Discord.Net.WebSocket", null },
+            { "Discord.Net.WebHook", null },
             { "Discord.Net.Interactions", null },
-            { "Discord.Net.Commands", null }
+            { "Discord.Net.Commands", null },
+            { "Discord.Net.Analyzers", null },
+            { "Discord.Net.Providers.WS4Net", null },
+            { "Discord.Net.BuildOverrides", null }
 		};
 
         var filter = new SearchFilter(true);
@@ -32,10 +36,14 @@ public class NugetModule(ILogger<NugetModule> logger, ILoggerFactory loggerFacto
 		{
 			var result = await p.SearchAsync(stat.Key, filter, 0, 10, NullLogger.Instance, CancellationToken.None);
 
-            if (result.Any(x => x.Identity.Id == stat.Key))
+			foreach (var res in result)
 			{
-                stats[stat.Key] = result.First(x => x.Identity.Id == stat.Key).DownloadCount;
+				if (res.Identity.Id == stat.Key)
+					stats[stat.Key] = result.First(x => x.Identity.Id == stat.Key).DownloadCount;
 			}
+
+			if (stats.All(x => x.Value is not null))
+				break;
 		}
 
 		var emb = new EmbedBuilder()
