@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Hosting;
 
-namespace DiscordNetTemplate.Services;
+namespace DNetUtilsBot.Services;
 
 public class DiscordBotService(DiscordSocketClient client, InteractionService interactions, IConfiguration config, ILogger<DiscordBotService> logger,
     InteractionHandler interactionHandler) : BackgroundService

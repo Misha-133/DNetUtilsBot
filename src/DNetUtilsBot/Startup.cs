@@ -5,7 +5,7 @@ global using Discord.WebSocket;
 global using Microsoft.Extensions.Configuration;
 global using Microsoft.Extensions.Logging;
 
-using DiscordNetTemplate.Services;
+using DNetUtilsBot.Services;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -15,7 +15,7 @@ using Serilog;
 
 var builder = new HostApplicationBuilder(args);
 
-builder.Configuration.AddEnvironmentVariables("DNetTemplate_");
+builder.Configuration.AddEnvironmentVariables("DNet_");
 
 var loggerConfig = new LoggerConfiguration()
     .WriteTo.Console()
@@ -28,9 +28,8 @@ builder.Logging.AddSerilog(loggerConfig, dispose: true);
 builder.Services.AddSingleton(new DiscordSocketClient(
     new DiscordSocketConfig
     {
-        GatewayIntents = GatewayIntents.AllUnprivileged,
+        GatewayIntents = GatewayIntents.Guilds,
         FormatUsersInBidirectionalUnicode = false,
-        // Add GatewayIntents.GuildMembers to the GatewayIntents and change this to true if you want to download all users on startup
         AlwaysDownloadUsers = false,
         LogGatewayIntentWarnings = false,
         LogLevel = LogSeverity.Info

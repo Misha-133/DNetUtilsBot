@@ -1,6 +1,6 @@
 using System.Reflection;
 
-namespace DiscordNetTemplate.Services;
+namespace DNetUtilsBot.Services;
 
 public class InteractionHandler(DiscordSocketClient client, InteractionService interactionService, IServiceProvider services, ILogger<InteractionHandler> logger)
 {
