@@ -1,10 +1,10 @@
-FROM mcr.microsoft.com/dotnet/runtime:8.0-jammy-chiseled AS base
+FROM mcr.microsoft.com/dotnet/runtime:8.0-alpine AS base
 USER app
 WORKDIR /app
 
 LABEL org.opencontainers.image.source=https://github.com/Misha-133/DNetUtilsBot
 
-FROM mcr.microsoft.com/dotnet/sdk:8.0-jammy AS build
+FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["src/DNetUtilsBot/DNetUtilsBot.csproj", "src/DNetUtilsBot/"]
