@@ -22,7 +22,7 @@ public class NugetModule(ILogger<NugetModule> logger, ILoggerFactory loggerFacto
 			{ "Discord.Net.Core", null },
             { "Discord.Net.Rest", null },
             { "Discord.Net.WebSocket", null },
-            { "Discord.Net.WebHook", null },
+            { "Discord.Net.Webhook", null },
             { "Discord.Net.Interactions", null },
             { "Discord.Net.Commands", null },
             { "Discord.Net.Analyzers", null },
