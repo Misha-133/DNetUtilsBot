@@ -5,6 +5,8 @@ WORKDIR /app
 LABEL org.opencontainers.image.source=https://github.com/Misha-133/DNetUtilsBot
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS build
+RUN apk add icu-libs icu-data-full
+
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["src/DNetUtilsBot/DNetUtilsBot.csproj", "src/DNetUtilsBot/"]
