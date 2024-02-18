@@ -120,10 +120,15 @@ public class NugetModule(ILogger<NugetModule> logger, ILoggerFactory loggerFacto
             .WithCurrentTimestamp()
             .WithTitle($"Package `{selection}`")
             .WithDescription($"```{result.Description}```")
-            .AddField("Downloads", $"`{result.DownloadCount}`", true)
+            .AddField("Total downloads", $"`{result.DownloadCount}`", true)
             .AddField("Is Listed", $"`{result.IsListed}`", true)
-            .AddField("Link", $"[Link](https://www.nuget.org/packages/{selection})", true)
-            .AddField("Owners", $"`{result.Owners}`")
+            .AddField("Link", $"[Link](https://www.nuget.org/packages/{selection})", true);
+
+		var versions = await result.GetVersionsAsync();
+		var current = versions.MaxBy(x => x.Version);
+
+        emb.AddField("Version", $"`{current.Version}` | Downloads: `{current.DownloadCount}`")
+			.AddField("Owners", $"`{result.Owners}`")
             .AddField("Tags", $"`{result.Tags}`")
 			.WithThumbnailUrl(result.IconUrl?.AbsoluteUri);
 
